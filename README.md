@@ -1,6 +1,16 @@
 #job-board-api Documentation
 -------------
+Deployment process
+-------------
+- git remote add origin https://raquel-f/job-board-api
+- git add .
+- git commit
+- git push origin master
+
+
+-------------
 **EndPoints**
+-------------
 
 - Skills
  - Get all skills 
