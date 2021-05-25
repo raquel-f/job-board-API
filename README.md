@@ -13,64 +13,64 @@ Deployment process
 -------------
 
 - Skills
- - Get all skills 
+  - Get all skills 
 curl -v http://localhost:3000/skill/
- - Get one skill by id
+  - Get one skill by id
 curl -v http://localhost:3000/skill/[id]
- - add skill 
+  - add skill 
 curl -d "{\"name\":\"[name]\", \"description\": [description]}" -H "Content-Type: application/json" -X PUT http://localhost:3000/skill/new
- - update skill
+  - update skill
 curl -d "{\"name\":\"[name]\", \"description\": [description]}" -H "Content-Type: application/json" -X PUT http://localhost:3000/skill/update/[id]
- - delete skill
+  - delete skill
 curl -X DELETE http://localhost:3000/skill/delete/[id]
 
 - Job Type
- - Get all job types
+  - Get all job types
 curl -v http://localhost:3000/jobType/
- - get job type by id
+  - get job type by id
 curl -v http://localhost:3000/jobType/[id]
- - add job type
+  - add job type
 curl -d "{\"job_type\":\"[job type]\"}" -H "Content-Type: application/json" http://localhost:3000/jobType/new
- - update job type
+  - update job type
 curl -d "{\"job_type\":\"[job type]\"}" -H "Content-Type: application/json" -X PUT http://localhost:3000/jobType/update/[id]
- - delete job type
+  - delete job type
 curl -X DELETE http://localhost:3000/jobType/delete/[id]
 
 - Location
- - Get all locations
+  - Get all locations
 curl -v http://localhost:3000/location/
- - get location by id
+  - get location by id
 curl -v http://localhost:3000/location/[id]
- - add location
+  - add location
 curl -d "{\"street\":\"[street]\",\"city\":\"[city]\",\"country\":\"[country]\",\"zip\":\"[zip code]\"}" -H "Content-Type: application/json" http://localhost:3000/location/new
- - update location 
+  - update location 
 curl -d "{\"street\":\"[street]\",\"city\":\"[city]\",\"country\":\"[country]\",\"zip\":\"[zip code]\"}" -H "Content-Type: application/json" http://localhost:3000/location/update/[id]
- - delete location
+  - delete location
 curl -X DELETE http://localhost:3000/location/delete/[id]
 
 - Job Post
- - Get all job posts
+  - Get all job posts
 curl -v http://localhost:3000/jobPost/
- - get job posts by id
+  - get job posts by id
 curl -v http://localhost:3000/jobPost/[id]
- - add job post
+  - add job post
 curl -d "{\"created_date\":\"[date]\",\"job_title\":\"[title]\",\"job_description\":\"[job description]\",\"is_active\":[is active],\"job_location_id\":[id of job location], \"job_type_id\":[id of job type]}" -H "Content-Type: application/json" http://localhost:3000/jobPost/new
- - update job post 
+  - update job post 
 curl -d "{\"created_date\":\"[date]\",\"job_title\":\"[title]\",\"job_description\":\"[job description]\",\"is_active\":[is active],\"job_location_id\":[id of job location], \"job_type_id\":[id of job type]}" -H "Content-Type: application/json" http://localhost:3000/jobPost/update/[id]
- - delete job post
+  - delete job post
 curl -X DELETE http://localhost:3000/jobPost/delete/[id]
 
 
 - Skill Set
- - Get all skills sets
+  - Get all skills sets
 curl -v http://localhost:3000/skillSet/
- - get all skill sets for a job post
+  - get all skill sets for a job post
 curl -v http://localhost:3000/skillSet/job/[job id]
- - get skill set by id
+  - get skill set by id
 curl -v http://localhost:3000/skillSet/[id]
- - add skill set
+  - add skill set
 curl -d "{\"skill_level\":[skill level],\"skill_id\":[skill id],\"job_post_id\":[job post id]}" -H "Content-Type: application/json" http://localhost:3000/skillSet/new
- - update skill set
+  - update skill set
 curl -d "{\"skill_level\":[skill level],\"skill_id\":[skill id],\"job_post_id\":[job post id]}" -H "Content-Type: application/json" http://localhost:3000/skillSet/update/[id]
- - delete skill set
+  - delete skill set
 curl -X DELETE http://localhost:3000/skillSet/delete/[id]
