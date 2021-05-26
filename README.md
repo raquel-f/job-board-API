@@ -2,10 +2,16 @@
 
 Deployment process
 -------------
-- git remote add origin https://raquel-f/job-board-api
-- git add .
-- git commit
-- git push origin master
+GitHub Repository
+ - git remote add origin https://github.com/raquel-f/job-board-API.git
+ - git add .
+ - git commit
+ - git push origin master
+
+Heroku Deployment
+ - heroku login
+ - heroku git: remote -a ws-job-api
+ - heroku git push heroku master
 
 Deployed API
 -------------
