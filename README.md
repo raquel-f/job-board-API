@@ -1,5 +1,5 @@
-#job-board-api Documentation
--------------
+# **Documentation**
+
 Deployment process
 -------------
 - git remote add origin https://raquel-f/job-board-api
@@ -7,6 +7,9 @@ Deployment process
 - git commit
 - git push origin master
 
+Deployed API
+-------------
+https://ws-job-api.herokuapp.com/
 
 -------------
 **EndPoints**
