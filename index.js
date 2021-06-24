@@ -1,6 +1,8 @@
 const express = require("express");
+var compression = require('compression');
 const bodyParser = require("body-parser");
 const app = express();
+app.use(compression());
 const port = process.env.PORT || 3001;
 
 // import routers
