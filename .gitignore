@@ -1,15 +1,24 @@
-.idea/
 .vscode/
+
+# Dependency directories
 node_modules/
+
 build
-.DS_Store
+
+# Output of 'npm pack'
 *.tgz
-my-app*
-template/src/__tests__/__snapshots__/
+
+# Logs
 lerna-debug.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /.changelog
+
+# Optional npm cache directory
 .npm/
-yarn.lock
+
+# dotenv environment variables file
+.env
+.env.test
+.env.production
