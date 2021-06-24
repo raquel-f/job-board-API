@@ -1,24 +1,11 @@
 # **Documentation**
 
-Deployment process
--------------
-GitHub Repository
- - git remote add origin https://github.com/raquel-f/job-board-API.git
- - git add .
- - git commit
- - git push origin master
-
-Heroku Deployment
- - heroku login
- - heroku git: remote -a ws-job-api
- - heroku git push heroku master
-
 Deployed API
 -------------
 https://ws-job-api.herokuapp.com/
 
--------------
-**EndPoints**
+
+EndPoints
 -------------
 
 - Skills
