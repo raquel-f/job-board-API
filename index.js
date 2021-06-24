@@ -2,6 +2,8 @@ const express = require("express");
 const compression = require("compression");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
+require('dotenv').config();
+
 const port = process.env.PORT || 3001;
 
 const app = express();
