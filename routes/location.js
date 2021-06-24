@@ -2,6 +2,15 @@ const express = require("express");
 const router = express.Router();
 const location = require("../services/location");
 
+// auth0 middleware
+const {checkJwt, checkPermissions} = require("../auth0");
+
+const locationPermissions = {
+  CreateLocation: "create:location",
+  UpdateLocation: "update:location",
+  DeleteLocation: "delete:location",
+}
+
 // GET all locations
 router.get("/", async function (req, res, next) {
   try {
@@ -24,8 +33,14 @@ router.get("/:id", async function (req, res, next) {
   }
 });
 
+// only allowed users can perform the calls bellow 
+router.use(checkJwt);
+
 // POST location
-router.post("/", async function (req, res, next) {
+router.post(
+  "/", 
+  checkPermissions(locationPermissions.CreateLocation),
+  async function (req, res, next) {
   try {
     res.json(await location.create(req.body));
   } catch (err) {
@@ -35,8 +50,13 @@ router.post("/", async function (req, res, next) {
   }
 });
 
+// only admin users can perform the calls bellow 
+
 // PUT location
-router.put("/:id", async function (req, res, next) {
+router.put(
+  "/:id", 
+  checkPermissions(locationPermissions.UpdateLocation), 
+  async function (req, res, next) {
   try {
     res.json(await location.update(req.params.id, req.body));
   } catch (err) {
@@ -47,7 +67,10 @@ router.put("/:id", async function (req, res, next) {
 });
 
 // DELETE location
-router.delete("/:id", async function (req, res, next) {
+router.delete(
+  "/:id", 
+  checkPermissions(locationPermissions.DeleteLocation),
+  async function (req, res, next) {
   try {
     res.json(await location.remove(req.params.id));
   } catch (err) {

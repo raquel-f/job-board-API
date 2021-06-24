@@ -12,6 +12,8 @@ const config = {
         database: env.DB_NAME,
     },
     listPerPage: env.LIST_PER_PAGE || 10,
+    authAudience: env.AUTH0_AUDIENCE, 
+    authDomain: env.AUTH0_DOMAIN,
 };
 
 module.exports = config;
