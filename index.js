@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // import routers
 const jobBoardRouter = require("./routes/jobPost");
@@ -18,6 +18,14 @@ app.use(
 );
 
 app.get("/", (req, res) => {
+  // cors enabling
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+
+  // api is ready
   res.json({ message: "ready!" });
 });
 
