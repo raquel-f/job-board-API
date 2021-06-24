@@ -1,9 +1,12 @@
 const express = require("express");
-var compression = require('compression');
+const compression = require("compression");
+const helmet = require("helmet");
 const bodyParser = require("body-parser");
+const port = process.env.PORT || 3001;
+
 const app = express();
 app.use(compression());
-const port = process.env.PORT || 3001;
+app.use(helmet());
 
 // import routers
 const jobBoardRouter = require("./routes/jobPost");
