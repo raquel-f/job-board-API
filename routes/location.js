@@ -3,13 +3,7 @@ const router = express.Router();
 const location = require("../services/location");
 
 // auth0 middleware
-const {checkJwt, checkPermissions} = require("../auth0");
-
-const locationPermissions = {
-  CreateLocation: "create:location",
-  UpdateLocation: "update:location",
-  DeleteLocation: "delete:location",
-}
+const {checkJwt, checkPermissions, permissions} = require("../auth0");
 
 // GET all locations
 router.get("/", async function (req, res, next) {
@@ -39,7 +33,7 @@ router.use(checkJwt);
 // POST location
 router.post(
   "/", 
-  checkPermissions(locationPermissions.CreateLocation),
+  checkPermissions(permissions.Registered),
   async function (req, res, next) {
   try {
     res.json(await location.create(req.body));
@@ -55,7 +49,7 @@ router.post(
 // PUT location
 router.put(
   "/:id", 
-  checkPermissions(locationPermissions.UpdateLocation), 
+  checkPermissions(permissions.Admin), 
   async function (req, res, next) {
   try {
     res.json(await location.update(req.params.id, req.body));
@@ -69,7 +63,7 @@ router.put(
 // DELETE location
 router.delete(
   "/:id", 
-  checkPermissions(locationPermissions.DeleteLocation),
+  checkPermissions(permissions.Admin),
   async function (req, res, next) {
   try {
     res.json(await location.remove(req.params.id));

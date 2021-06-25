@@ -26,4 +26,10 @@ const checkPermissions = (permissions) => {
   });
 };
 
-module.exports = { checkJwt, checkPermissions };
+// permissions scopes
+const permissions = {
+  Registered: "registered",
+  Admin: "admin",
+}
+
+module.exports = { checkJwt, checkPermissions, permissions };
