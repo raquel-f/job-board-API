@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const jobBoard = require("../services/jobPost");
 
+// auth0 middleware
+const { checkJwt, checkPermissions, permissions } = require("../auth0");
+
 // GET job posts
 router.get("/", async function (req, res, next) {
   try {
@@ -24,8 +27,14 @@ router.get("/:id", async function (req, res, next) {
   }
 });
 
+// only allowed users can perform the calls bellow
+router.use(checkJwt);
+
 // POST job post
-router.post("/", async function (req, res, next) {
+router.post(
+  "/", 
+  checkPermissions(permissions.Registered),
+  async function (req, res, next) {
   try {
     res.json(await jobBoard.create(req.body));
   } catch (err) {
@@ -35,8 +44,13 @@ router.post("/", async function (req, res, next) {
   }
 });
 
+// only admin users can perform the calls bellow
+
 // PUT job post
-router.put("/:id", async function (req, res, next) {
+router.put(
+  "/:id", 
+  checkPermissions(permissions.Admin),
+  async function (req, res, next) {
   try {
     res.json(await jobBoard.update(req.params.id, req.body));
   } catch (err) {
@@ -47,7 +61,10 @@ router.put("/:id", async function (req, res, next) {
 });
 
 // DELETE job post
-router.delete("/:id", async function (req, res, next) {
+router.delete(
+  "/:id", 
+  checkPermissions(permissions.Admin),
+  async function (req, res, next) {
   try {
     res.json(await jobBoard.remove(req.params.id));
   } catch (err) {

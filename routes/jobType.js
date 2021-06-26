@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const jobType = require("../services/jobType");
 
+// auth0 middleware
+const { checkJwt, checkPermissions, permissions } = require("../auth0");
+
 // GET all job types
 router.get("/", async function (req, res, next) {
   try {
@@ -24,37 +27,54 @@ router.get("/:id", async function (req, res, next) {
   }
 });
 
+// only allowed users can perform the calls bellow
+router.use(checkJwt);
+
 // POST job type
-router.post("/", async function (req, res, next) {
-  try {
-    res.json(await jobType.create(req.body));
-  } catch (err) {
-    console.error(`Error while creating job type`, err.message);
-    res.status(400).send("Error while creating job type");
-    next(err);
+router.post(
+  "/",
+  checkPermissions(permissions.Registered),
+  async function (req, res, next) {
+    try {
+      res.json(await jobType.create(req.body));
+    } catch (err) {
+      console.error(`Error while creating job type`, err.message);
+      res.status(400).send("Error while creating job type");
+      next(err);
+    }
   }
-});
+);
+
+// only admin users can perform the calls bellow
 
 // PUT job type
-router.put("/:id", async function (req, res, next) {
-  try {
-    res.json(await jobType.update(req.params.id, req.body));
-  } catch (err) {
-    console.error(`Error while updating job type`, err.message);
-    res.status(400).send("Error while updating job type");
-    next(err);
+router.put(
+  "/:id",
+  checkPermissions(permissions.Admin),
+  async function (req, res, next) {
+    try {
+      res.json(await jobType.update(req.params.id, req.body));
+    } catch (err) {
+      console.error(`Error while updating job type`, err.message);
+      res.status(400).send("Error while updating job type");
+      next(err);
+    }
   }
-});
+);
 
 // DELETE job type
-router.delete("/:id", async function (req, res, next) {
-  try {
-    res.json(await jobType.remove(req.params.id));
-  } catch (err) {
-    console.error(`Error while deleting job type`, err.message);
-    res.status(400).send("Error while deleting job type");
-    next(err);
+router.delete(
+  "/:id",
+  checkPermissions(permissions.Admin),
+  async function (req, res, next) {
+    try {
+      res.json(await jobType.remove(req.params.id));
+    } catch (err) {
+      console.error(`Error while deleting job type`, err.message);
+      res.status(400).send("Error while deleting job type");
+      next(err);
+    }
   }
-});
+);
 
 module.exports = router;

@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const skillSet = require("../services/skillSet");
 
+// auth0 middleware
+const { checkJwt, checkPermissions, permissions } = require("../auth0");
+
 // GET all skill sets
 router.get("/", async function (req, res, next) {
   try {
@@ -35,37 +38,54 @@ router.get("/:id", async function (req, res, next) {
   }
 });
 
+// only allowed users can perform the calls bellow
+router.use(checkJwt);
+
 // POST skill set
-router.post("/", async function (req, res, next) {
-  try {
-    res.json(await skillSet.create(req.body));
-  } catch (err) {
-    console.error(`Error while creating skill set`, err.message);
-    res.status(400).send("Error while creating skill set");
-    next(err);
+router.post(
+  "/",
+  checkPermissions(permissions.Registered),
+  async function (req, res, next) {
+    try {
+      res.json(await skillSet.create(req.body));
+    } catch (err) {
+      console.error(`Error while creating skill set`, err.message);
+      res.status(400).send("Error while creating skill set");
+      next(err);
+    }
   }
-});
+);
+
+// only admin users can perform the calls bellow
 
 // PUT skill set
-router.put("/:id", async function (req, res, next) {
-  try {
-    res.json(await skillSet.update(req.params.id, req.body));
-  } catch (err) {
-    console.error(`Error while updating skill set`, err.message);
-    res.status(400).send("Error while updating skill set");
-    next(err);
+router.put(
+  "/:id",
+  checkPermissions(permissions.Admin),
+  async function (req, res, next) {
+    try {
+      res.json(await skillSet.update(req.params.id, req.body));
+    } catch (err) {
+      console.error(`Error while updating skill set`, err.message);
+      res.status(400).send("Error while updating skill set");
+      next(err);
+    }
   }
-});
+);
 
 // DELETE skill set
-router.delete("/:id", async function (req, res, next) {
-  try {
-    res.json(await skillSet.remove(req.params.id));
-  } catch (err) {
-    console.error(`Error while deleting skill set`, err.message);
-    res.status(400).send("Error while deleting skill set");
-    next(err);
+router.delete(
+  "/:id",
+  checkPermissions(permissions.Admin),
+  async function (req, res, next) {
+    try {
+      res.json(await skillSet.remove(req.params.id));
+    } catch (err) {
+      console.error(`Error while deleting skill set`, err.message);
+      res.status(400).send("Error while deleting skill set");
+      next(err);
+    }
   }
-});
+);
 
 module.exports = router;
