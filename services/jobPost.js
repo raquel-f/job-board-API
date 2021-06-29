@@ -44,6 +44,61 @@ async function getJobPost(page=1, id){
     }
 }
 
+// READ Job Type of Job Post
+async function getJobPostJobType(page=1, id){
+    const offset = helper.getOffset(page, config.listPerPage);
+    const rows = await db.query(
+        `SELECT job_type.id, job_type.job_type 
+        FROM job_type 
+        INNER JOIN job_post ON job_type.id=job_post.job_type_id AND job_post.id=?
+        LIMIT ?,?`,  
+        [id, offset, config.listPerPage]
+    );
+    const data = helper.emptyOrRows(rows);
+    const meta = {page};
+    return {
+        data,
+        meta
+    }
+}
+
+// READ Location of Job Post
+async function getJobPostLocation(page=1, id){
+    const offset = helper.getOffset(page, config.listPerPage);
+    const rows = await db.query(
+        `SELECT job_location.id, job_location.street, job_location.city, job_location.country, job_location.zip
+        FROM job_location 
+        INNER JOIN job_post ON job_location.id=job_post.job_location_id AND job_post.id=?
+        LIMIT ?,?`,  
+        [id, offset, config.listPerPage]
+    );
+    const data = helper.emptyOrRows(rows);
+    const meta = {page};
+    return {
+        data,
+        meta
+    }
+}
+
+// READ Skill Sets and Skills of Job Post
+async function getJobPostSkillSets(page=1, id){
+    const offset = helper.getOffset(page, config.listPerPage);
+    const rows = await db.query(
+        `SELECT job_skill_set.id, job_skill_set.skill_level, job_skill_set.skill_id, skill.name, skill.description
+        FROM job_skill_set
+        LEFT JOIN skill ON skill.id = job_skill_set.skill_id
+        INNER JOIN job_post ON job_skill_set.job_post_id=job_post.id AND job_post.id=?
+        LIMIT ?,?`,  
+        [id, offset, config.listPerPage]
+    );
+    const data = helper.emptyOrRows(rows);
+    const meta = {page};
+    return {
+        data,
+        meta
+    }
+}
+
 // CREATE job post
 async function create(jobPost){
     const result = await db.query(
@@ -105,6 +160,9 @@ async function remove(id){
 module.exports = {
     getMultiple,
     getJobPost,
+    getJobPostJobType,
+    getJobPostLocation,
+    getJobPostSkillSets,
     create,
     update,
     remove

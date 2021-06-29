@@ -27,6 +27,39 @@ router.get("/:id", async function (req, res, next) {
   }
 });
 
+// GET job type of job post
+router.get("/:id/type", async function (req, res, next) {
+  try {
+    res.json(await jobBoard.getJobPostJobType(req.query.page, req.params.id));
+  } catch (err) {
+    console.error(`Error while getting job type of job post`, err.message);
+    res.status(400).send("Error while getting job type of job post");
+    next(err);
+  }
+});
+
+// GET location of job post
+router.get("/:id/location", async function (req, res, next) {
+  try {
+    res.json(await jobBoard.getJobPostLocation(req.query.page, req.params.id));
+  } catch (err) {
+    console.error(`Error while getting location of job post`, err.message);
+    res.status(400).send("Error while getting location of job post");
+    next(err);
+  }
+});
+
+// GET skill sets of job post
+router.get("/:id/skills", async function (req, res, next) {
+  try {
+    res.json(await jobBoard.getJobPostSkillSets(req.query.page, req.params.id));
+  } catch (err) {
+    console.error(`Error while getting skills of job post`, err.message);
+    res.status(400).send("Error while getting skills of job post");
+    next(err);
+  }
+});
+
 // only allowed users can perform the calls bellow
 router.use(checkJwt);
 
