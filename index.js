@@ -33,11 +33,11 @@ app.get("/", (req, res) => {
 });
 
 // use routers
-app.use("/jobPost", jobBoardRouter);
-app.use("/skill", skillsRouter);
-app.use("/jobType", jobTypeRouter);
-app.use("/location", locationRouter);
-app.use("/skillSet", skillSetRouter);
+app.use("/jobPosts", jobBoardRouter);
+app.use("/skills", skillsRouter);
+app.use("/jobTypes", jobTypeRouter);
+app.use("/locations", locationRouter);
+app.use("/skillSets", skillSetRouter);
 
 // error handler
 app.use((err, req, res, next) => {
