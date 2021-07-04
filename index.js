@@ -11,7 +11,6 @@ const app = express();
 app.use(compression());
 app.use(helmet());
 app.use(cors());
-//app.options('*', cors());
 
 // import routers
 const jobBoardRouter = require("./routes/jobPost");
