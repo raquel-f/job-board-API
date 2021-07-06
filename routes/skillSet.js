@@ -38,6 +38,19 @@ router.get("/:id", async function (req, res, next) {
   }
 });
 
+// GET skill from skill set
+router.get("/:id/skill", async function (req, res, next) {
+  try {
+    res.json(
+      await skillSet.getSkillFromSkillSet(req.query.page, req.params.id)
+    );
+  } catch (err) {
+    console.error(`Error while getting skill from skill set`, err.message);
+    res.status(400).send("Error while getting skill from skill set");
+    next(err);
+  }
+});
+
 // only allowed users can perform the calls bellow
 router.use(checkJwt);
 
