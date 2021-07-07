@@ -16,6 +16,17 @@ router.get("/", async function (req, res, next) {
   }
 });
 
+// GET number of job types in the db
+router.get("/total", async function (req, res, next) {
+  try {
+    res.json(await jobType.getRows(req.query.page));
+  } catch (err) {
+    console.error(`Error while getting number of job types`, err.message);
+    res.status(400).send("Error while getting number of job types");
+    next(err);
+  }
+});
+
 // GET one specific job type
 router.get("/:id", async function (req, res, next) {
   try {

@@ -16,6 +16,17 @@ router.get("/", async function (req, res, next) {
   }
 });
 
+// GET number of locations in the db
+router.get("/total", async function (req, res, next) {
+  try {
+    res.json(await location.getRows(req.query.page));
+  } catch (err) {
+    console.error(`Error while getting number of locations`, err.message);
+    res.status(400).send("Error while getting nunmber of locations");
+    next(err);
+  }
+});
+
 // GET one specific location
 router.get("/:id", async function (req, res, next) {
   try {

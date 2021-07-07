@@ -16,6 +16,17 @@ router.get("/", async function (req, res, next) {
   }
 });
 
+// GET number of skills in the db
+router.get("/total", async function (req, res, next) {
+  try {
+    res.json(await skills.getRows(req.query.page));
+  } catch (err) {
+    console.error(`Error while getting number of skills`, err.message);
+    res.status(400).send("Error while getting number of skills");
+    next(err);
+  }
+});
+
 // GET one specific skill
 router.get("/:id", async function (req, res, next) {
   try {

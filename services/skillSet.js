@@ -19,6 +19,22 @@ async function getMultiple(page = 1) {
   };
 }
 
+// READ all skill sets
+async function getRows(page = 1) {
+  const offset = helper.getOffset(page, config.listPerPage);
+  const rows = await db.query(
+    `SELECT COUNT(*) as total FROM job_skill_set LIMIT ?,?`,
+    [offset, config.listPerPage]
+  );
+  const data = helper.emptyOrRows(rows);
+  const meta = { page };
+
+  return {
+    data,
+    meta,
+  };
+}
+
 // READ all job skill sets
 async function getMultipleFromJob(page = 1, jobID) {
   const offset = helper.getOffset(page, config.listPerPage);
@@ -58,22 +74,22 @@ async function getSkillSet(page = 1, id) {
 
 // READ skill from skill set
 async function getSkillFromSkillSet(page = 1, skillSetID) {
-    const offset = helper.getOffset(page, config.listPerPage);
-    const rows = await db.query(
-      `SELECT skill.id, skill.name, skill.description
+  const offset = helper.getOffset(page, config.listPerPage);
+  const rows = await db.query(
+    `SELECT skill.id, skill.name, skill.description
           FROM skill 
           INNER JOIN job_skill_set ON skill.id=job_skill_set.skill_id AND job_skill_set.id=?
           LIMIT ?,?`,
-      [skillSetID, offset, config.listPerPage]
-    );
-    const data = helper.emptyOrRows(rows);
-    const meta = { page };
-  
-    return {
-      data,
-      meta,
-    };
-  }
+    [skillSetID, offset, config.listPerPage]
+  );
+  const data = helper.emptyOrRows(rows);
+  const meta = { page };
+
+  return {
+    data,
+    meta,
+  };
+}
 
 // CREATE skill set
 async function create(skillSet) {
@@ -124,6 +140,7 @@ async function remove(id) {
 
 module.exports = {
   getMultiple,
+  getRows,
   getMultipleFromJob,
   getSkillSet,
   getSkillFromSkillSet,

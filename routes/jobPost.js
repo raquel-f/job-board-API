@@ -16,6 +16,17 @@ router.get("/", async function (req, res, next) {
   }
 });
 
+// GET number of job posts in the db
+router.get("/total", async function (req, res, next) {
+  try {
+    res.json(await jobBoard.getRows(req.query.page));
+  } catch (err) {
+    console.error(`Error while getting number of job posts `, err.message);
+    res.status(400).send("Error while getting number of job posts");
+    next(err);
+  }
+});
+
 // GET one specific job post
 router.get("/:id", async function (req, res, next) {
   try {
