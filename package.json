@@ -19,6 +19,7 @@
     "express-jwt-authz": "^2.4.1",
     "helmet": "^4.6.0",
     "jwks-rsa": "^2.0.3",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "parse-database-url": "^0.3.0"
   }
 }
