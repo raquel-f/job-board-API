@@ -14,6 +14,7 @@ const config = {
     user: dbConfig.user,
     password: dbConfig.password,
     database: dbConfig.database,
+    connectionLimit: env.CONNECTION_LIMIT || 9,
   },
   listPerPage: env.LIST_PER_PAGE || 10,
   authAudience: env.AUTH0_AUDIENCE,
