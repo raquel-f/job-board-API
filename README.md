@@ -1,4 +1,6 @@
-# **Job Board API**
+[![Generic badge](https://img.shields.io/badge/Status-Under%20Maintenance-orange.svg)](https://shields.io/)
+
+# Job Board API
 
 A simple Job Board API with security
 
@@ -23,11 +25,10 @@ cd job-board-api
 # Make it your own
 rm -rf .git && git init
 
-# Add .env file and add your own DB_HOST, DB_USER. DB_PASSWORD, DB_NAME, LIST_PER_PAGE, PORT, AUTH0_AUDIENCE & AUTH0_DOMAIN
-DB_HOST=<DATABASE HOST>
-DB_USER=<DATABASE USERNAME>
-DB_PASSWORD=<DATABASE PASSWORD>
-DB_NAME=<DATABASE NAME>
+# Add .env file and add your own CLEARDB_DATABASE_URL, LIST_PER_PAGE, PORT, AUTH0_AUDIENCE & AUTH0_DOMAIN
+# DATABASE URL SYNTAX: <service>://<username>:<password>@<host>/<database>?[optional params]
+
+CLEARDB_DATABASE_URL=<DATABASE URL> 
 LIST_PER_PAGE=<NUMBER OF RESULTS PER PAGE>
 PORT=<PORT THE API RUNS IN>
 AUTH0_AUDIENCE=<AUTH0 AUDIENCE URL>
