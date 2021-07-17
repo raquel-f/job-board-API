@@ -9,7 +9,7 @@ async function getMultiple(page = 1) {
     `SELECT id, created_date, job_title, job_description, 
         is_active, job_location_id, job_type_id
         FROM job_post LIMIT ?,?`,
-    [offset, config.listPerPage]
+    [offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -25,7 +25,7 @@ async function getRows(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
     `SELECT COUNT(*) as total FROM job_post LIMIT ?,?`,
-    [offset, config.listPerPage]
+    [offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -45,7 +45,7 @@ async function getJobPost(page = 1, id) {
         FROM job_post 
         WHERE id=? 
         LIMIT ?,?`,
-    [id, offset, config.listPerPage]
+    [id, offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -63,7 +63,7 @@ async function getJobPostJobType(page = 1, id) {
         FROM job_type 
         INNER JOIN job_post ON job_type.id=job_post.job_type_id AND job_post.id=?
         LIMIT ?,?`,
-    [id, offset, config.listPerPage]
+    [id, offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -81,7 +81,7 @@ async function getJobPostLocation(page = 1, id) {
         FROM job_location 
         INNER JOIN job_post ON job_location.id=job_post.job_location_id AND job_post.id=?
         LIMIT ?,?`,
-    [id, offset, config.listPerPage]
+    [id, offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -100,7 +100,7 @@ async function getJobPostSkillSets(page = 1, id) {
         LEFT JOIN skill ON skill.id = job_skill_set.skill_id
         INNER JOIN job_post ON job_skill_set.job_post_id=job_post.id AND job_post.id=?
         LIMIT ?,?`,
-    [id, offset, config.listPerPage]
+    [id, offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };

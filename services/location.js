@@ -8,7 +8,7 @@ async function getMultiple(page = 1) {
   const rows = await db.query(
     `SELECT id, street, city, country, zip
         FROM job_location LIMIT ?,?`,
-    [offset, config.listPerPage]
+    [offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };

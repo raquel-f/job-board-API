@@ -8,7 +8,7 @@ async function getMultiple(page = 1) {
   const rows = await db.query(
     `SELECT id, skill_level, skill_id, job_post_id
         FROM job_skill_set LIMIT ?,?`,
-    [offset, config.listPerPage]
+    [offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -24,7 +24,7 @@ async function getRows(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
     `SELECT COUNT(*) as total FROM job_skill_set LIMIT ?,?`,
-    [offset, config.listPerPage]
+    [offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -43,7 +43,7 @@ async function getMultipleFromJob(page = 1, jobID) {
         FROM job_skill_set 
         WHERE job_post_id=? 
         LIMIT ?,?`,
-    [jobID, offset, config.listPerPage]
+    [jobID, offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -62,7 +62,7 @@ async function getSkillSet(page = 1, id) {
         FROM job_skill_set 
         WHERE id=? 
         LIMIT ?,?`,
-    [id, offset, config.listPerPage]
+    [id, offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -80,7 +80,7 @@ async function getSkillFromSkillSet(page = 1, skillSetID) {
           FROM skill 
           INNER JOIN job_skill_set ON skill.id=job_skill_set.skill_id AND job_skill_set.id=?
           LIMIT ?,?`,
-    [skillSetID, offset, config.listPerPage]
+    [skillSetID, offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
