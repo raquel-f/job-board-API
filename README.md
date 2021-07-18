@@ -22,9 +22,6 @@ git clone git@github.com:raquel-f/job-board-API.git
 # Get into the directory
 cd job-board-api
 
-# Make it your own
-rm -rf .git && git init
-
 # Add .env file and add your own CLEARDB_DATABASE_URL, LIST_PER_PAGE, PORT, AUTH0_AUDIENCE & AUTH0_DOMAIN
 # DATABASE URL SYNTAX: <service>://<username>:<password>@<host>/<database>?[optional params]
 
