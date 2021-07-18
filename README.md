@@ -1,4 +1,4 @@
-[![Generic badge](https://img.shields.io/badge/Status-Under%20Maintenance-orange.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Status-Live-green.svg)](https://shields.io/)
 
 # Job Board API
 
@@ -29,6 +29,7 @@ rm -rf .git && git init
 # DATABASE URL SYNTAX: <service>://<username>:<password>@<host>/<database>?[optional params]
 
 CLEARDB_DATABASE_URL=<DATABASE URL> 
+CONNECTION_LIMIT=<MAXIMUM DATABASE USER CONNECTIONS>
 LIST_PER_PAGE=<NUMBER OF RESULTS PER PAGE>
 PORT=<PORT THE API RUNS IN>
 AUTH0_AUDIENCE=<AUTH0 AUDIENCE URL>
