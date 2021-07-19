@@ -1,4 +1,4 @@
-[![Generic badge](https://img.shields.io/badge/Status-Under%20Maintenance-orange.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Status-Live-green.svg)](https://shields.io/)
 
 # Job Board API
 
@@ -22,13 +22,11 @@ git clone git@github.com:raquel-f/job-board-API.git
 # Get into the directory
 cd job-board-api
 
-# Make it your own
-rm -rf .git && git init
-
 # Add .env file and add your own CLEARDB_DATABASE_URL, LIST_PER_PAGE, PORT, AUTH0_AUDIENCE & AUTH0_DOMAIN
 # DATABASE URL SYNTAX: <service>://<username>:<password>@<host>/<database>?[optional params]
 
 CLEARDB_DATABASE_URL=<DATABASE URL> 
+CONNECTION_LIMIT=<MAXIMUM DATABASE USER CONNECTIONS>
 LIST_PER_PAGE=<NUMBER OF RESULTS PER PAGE>
 PORT=<PORT THE API RUNS IN>
 AUTH0_AUDIENCE=<AUTH0 AUDIENCE URL>
