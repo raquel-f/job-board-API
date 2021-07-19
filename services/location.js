@@ -24,7 +24,7 @@ async function getRows(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
     `SELECT COUNT(*) as total FROM job_location LIMIT ?,?`,
-    [offset, config.listPerPage]
+    [offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -43,7 +43,7 @@ async function getLocation(page = 1, id) {
         FROM job_location 
         WHERE id=? 
         LIMIT ?,?`,
-    [id, offset, config.listPerPage]
+    [id, offset, parseInt(config.listPerPage)]
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
